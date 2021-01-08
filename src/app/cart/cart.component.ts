@@ -1,19 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { ServiceCartService } from '../service.service';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder } from "@angular/forms";
+import { ServiceCartService } from "../service.service";
 
 @Component({
-  selector: 'app-cart',
-  templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  selector: "app-cart",
+  templateUrl: "./cart.component.html",
+  styleUrls: ["./cart.component.css"]
 })
 export class CartComponent implements OnInit {
-
   items;
+  checkoutForm;
 
-  constructor(private cartService: ServiceCartService) { }
-
-  ngOnInit() {
-     this.items = this.cartService.getItems()
+  constructor(
+    private cartService: ServiceCartService,
+    private formBuilder: FormBuilder
+  ) {
+    this.checkoutForm = this.formBuilder.group({
+      name: "",
+      address: ""
+    });
   }
 
+  ngOnInit() {
+    this.items = this.cartService.getItems();
+  }
 }
